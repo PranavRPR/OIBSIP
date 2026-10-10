@@ -1,0 +1,8 @@
+[System.IO.File]::WriteAllText("$PWD\.gitignore", @'
+target/
+*.class
+reservation.db
+.idea/
+*.iml
+.vscode/
+'@)
