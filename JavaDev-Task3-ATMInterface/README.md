@@ -1,5 +1,4 @@
-$enc = New-Object System.Text.UTF8Encoding $false
-$content = @'
+
 # ATM Interface
 
 A console-based simulation of an ATM machine built with Core Java, demonstrating Object-Oriented Programming (OOP) principles. Users can authenticate with a User ID and PIN to perform standard banking transactions.
