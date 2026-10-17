@@ -13,7 +13,6 @@ public class Account {
         this.balance = initialBalance;
         this.transactions = new ArrayList<>();
     }
-
     public String getUserId() { return userId; }
     public double getBalance() { return balance; }
     public void setBalance(double balance) { this.balance = balance; }

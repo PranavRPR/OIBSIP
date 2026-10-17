@@ -1,7 +1,11 @@
+import javax.swing.*;
+
 public class Main {
     public static void main(String[] args) {
-        Bank bank = new Bank();
-        ATM atm = new ATM(bank);
-        atm.start();
+        SwingUtilities.invokeLater(() -> {
+            try { UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName()); } catch (Exception ignored) {}
+            Bank bank = new Bank();
+            new ATM(bank).setVisible(true);
+        });
     }
 }

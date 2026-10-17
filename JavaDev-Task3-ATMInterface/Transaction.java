@@ -16,7 +16,7 @@ public class Transaction {
 
     @Override
     public String toString() {
-        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
+        DateTimeFormatter fmt = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
         return String.format("[%s] %-12s | $%-8.2f | %s", timestamp.format(fmt), type, amount, description);
     }
 }
