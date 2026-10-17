@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>User Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-slate-100 min-h-screen text-slate-800">
+    <nav class="bg-indigo-600 text-white p-4 flex justify-between items-center shadow-md">
+        <h1 class="text-xl font-bold">Library System</h1>
+        <div>
+            <span th:text="'Welcome, ' + ${username}" class="mr-4 font-medium"></span>
+            <a href="/logout" class="bg-indigo-800 px-4 py-2 rounded hover:bg-indigo-900 transition text-sm">Logout</a>
+        </div>
+    </nav>
+
+    <div class="max-w-6xl mx-auto p-6 grid grid-cols-3 gap-6">
+        <!-- Book Catalogue -->
+        <div class="col-span-2 bg-white rounded-xl shadow p-6">
+            <h2 class="text-lg font-bold mb-4 text-indigo-600">Available Books</h2>
+            <table class="w-full text-left border-collapse">
+                <thead>
+                    <tr class="border-b">
+                        <th class="py-2">Title</th>
+                        <th class="py-2">Author</th>
+                        <th class="py-2">Available</th>
+                        <th class="py-2">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="book : ${books}" class="border-b hover:bg-slate-50">
+                        <td class="py-3 font-medium" th:text="${book.title}"></td>
+                        <td class="py-3 text-slate-500" th:text="${book.author}"></td>
+                        <td class="py-3" th:text="${book.available}"></td>
+                        <td class="py-3">
+                            <form th:action="@{/user/issue}" method="post">
+                                <input type="hidden" name="bookId" th:value="${book.id}">
+                                <button type="submit" class="text-indigo-600 hover:underline font-semibold" th:disabled="${book.available == 0}">Issue</button>
+                            </form>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- My Issued Books -->
+        <div class="bg-white rounded-xl shadow p-6">
+            <h2 class="text-lg font-bold mb-4 text-indigo-600">My Issued Books</h2>
+            <div th:if="${#lists.isEmpty(issues)}" class="text-slate-500 text-sm">No books currently issued.</div>
+            <div th:each="issue : ${issues}" class="border-b py-3">
+                <p class="font-bold" th:text="${issue.title}"></p>
+                <p class="text-sm text-slate-500" th:text="'Due: ' + ${issue.due_date}"></p>
+                <form th:action="@{/user/return}" method="post" class="mt-2">
+                    <input type="hidden" name="issueId" th:value="${issue.id}">
+                    <button type="submit" class="bg-green-500 hover:bg-green-600 text-white text-sm px-3 py-1 rounded transition">Return</button>
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

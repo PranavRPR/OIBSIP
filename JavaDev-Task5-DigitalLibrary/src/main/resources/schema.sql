@@ -1,0 +1,26 @@
+CREATE TABLE IF NOT EXISTS users (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    username TEXT UNIQUE NOT NULL,
+    password TEXT NOT NULL,
+    role TEXT NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS books (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    title TEXT NOT NULL,
+    author TEXT NOT NULL,
+    category TEXT NOT NULL,
+    quantity INTEGER NOT NULL,
+    available INTEGER NOT NULL
+);
+
+CREATE TABLE IF NOT EXISTS issues (
+    id INTEGER PRIMARY KEY AUTOINCREMENT,
+    user_id INTEGER NOT NULL,
+    book_id INTEGER NOT NULL,
+    issue_date TEXT NOT NULL,
+    due_date TEXT NOT NULL,
+    return_date TEXT,
+    fine REAL DEFAULT 0,
+    status TEXT NOT NULL
+);
